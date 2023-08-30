@@ -1,8 +1,8 @@
-import { FC, InputHTMLAttributes } from 'react'
+import { InputHTMLAttributes, memo } from 'react'
 import { S } from './input.styled'
 
 type Props = InputHTMLAttributes<HTMLInputElement>
 
-export const SharedUiInputComponent: FC<Props> = (props) => {
+export const SharedUiInputComponent = memo((props: Props) => {
     return <S.Input data-testid='SharedUiInputComponent' {...props} />
-}
+})

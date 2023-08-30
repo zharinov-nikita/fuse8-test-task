@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { S } from './card.styled'
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
     date?: string
 }
 
-export const SharedUiCardComponent: FC<Props> = (props) => {
+export const SharedUiCardComponent: FC<Props> = memo((props) => {
     return (
         <S.Card data-testid='SharedUiCardComponent'>
             <S.CardBody>
@@ -19,4 +19,4 @@ export const SharedUiCardComponent: FC<Props> = (props) => {
             </S.CardFooter>
         </S.Card>
     )
-}
+})

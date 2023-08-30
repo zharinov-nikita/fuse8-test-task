@@ -7,4 +7,6 @@ export namespace S {
         flex-direction: column;
         gap: 24px;
     `
+
+    export const FoundJokes = styled.p``
 }
