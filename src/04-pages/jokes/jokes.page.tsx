@@ -15,10 +15,6 @@ export const PageJokes = () => {
                 autoFocus
             />
             <S.FoundJokes>Found jokes: {query.data?.total || 0}</S.FoundJokes>
-
-            {query.isError && 'Jokes error'}
-            {query.data && query.isLoading && 'Jokes loading...'}
-
             {query.data &&
                 query.data.result.map(({ id, value }) => (
                     <SharedUiCardComponent title={value} key={id} />
