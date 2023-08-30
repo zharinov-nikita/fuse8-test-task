@@ -7,6 +7,7 @@ export namespace S {
         padding: 24px;
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         gap: 24px;
     `
     export const CardBody = styled.div``
@@ -21,6 +22,10 @@ export namespace S {
         color: ${({ theme }) => theme.colors.primary};
         font-size: 20px;
         font-weight: 400;
+
+        &:hover {
+            color: ${({ theme }) => theme.colors.brand};
+        }
     `
 
     export const SecondaryText = styled.p`
@@ -30,6 +35,6 @@ export namespace S {
         font-weight: 400;
     `
 
-    export const Hash = styled(SecondaryText)``
+    export const Id = styled(SecondaryText)``
     export const Date = styled(SecondaryText)``
 }

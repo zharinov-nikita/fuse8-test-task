@@ -12,22 +12,28 @@ export const PageJokes = () => {
 
     return (
         <S.PageJokes>
-            <SharedUiInputComponent
-                value={joke}
-                onChange={onChange}
-                placeholder='Search jokes...'
-                autoFocus
-            />
+            <S.SearchJokes>
+                <S.SearchJokesInput
+                    value={joke}
+                    onChange={onChange}
+                    placeholder='Search jokes...'
+                    autoFocus
+                />
+            </S.SearchJokes>
             <S.FoundJokes>Found jokes: {query.data?.total || 0}</S.FoundJokes>
-            {query.data &&
-                query.data.result.map(({ id, value, created_at }) => (
-                    <SharedUiCardComponent
-                        title={value}
-                        key={id}
-                        hash={id}
-                        date={utilFormatDate(created_at)}
-                    />
-                ))}
+            <S.Jokes>
+                {query.data &&
+                    query.data.result.map(({ id, value, created_at, url }) => (
+                        <S.Joke
+                            target='_blank'
+                            to={url}
+                            title={value}
+                            key={id}
+                            id={id}
+                            date={utilFormatDate(created_at)}
+                        />
+                    ))}
+            </S.Jokes>
         </S.PageJokes>
     )
 }

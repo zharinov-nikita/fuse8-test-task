@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { AppStyleReset, appStyleTheme } from './styles'
 import { ThemeProvider } from 'styled-components'
-import { PageJoke, PageJokes } from '@pages'
+import { PageJokes } from '@pages'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const queryClient = new QueryClient()
@@ -13,7 +13,6 @@ export const App = () => {
                 <AppStyleReset />
                 <Routes>
                     <Route element={<PageJokes />} path='jokes' />
-                    <Route element={<PageJoke />} path='joke' />
                     <Route element={<Navigate to='jokes' />} path='*' />
                 </Routes>
             </ThemeProvider>
