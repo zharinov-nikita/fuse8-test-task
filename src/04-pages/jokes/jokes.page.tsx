@@ -20,16 +20,16 @@ const Jokes = memo((props: { jokes: Joke[] }) => {
 const JokesSkeleton = () => {
     return (
         <S.JokesListSkeleton>
-            <S.SecondaryJokesListSkeleton>
+            <S.PrimaryJokesListSkeleton>
                 {utilGenerateArrayWithUniqueIds(2).map(({ id }) => (
                     <S.JokeItemSkeleton key={id} />
                 ))}
-            </S.SecondaryJokesListSkeleton>
-            <S.PrimaryJokesListSkeleton>
+            </S.PrimaryJokesListSkeleton>
+            <S.SecondaryJokesListSkeleton>
                 {utilGenerateArrayWithUniqueIds(6).map(({ id }) => (
                     <S.JokeItemSkeleton key={id} />
                 ))}
-            </S.PrimaryJokesListSkeleton>
+            </S.SecondaryJokesListSkeleton>
         </S.JokesListSkeleton>
     )
 }
