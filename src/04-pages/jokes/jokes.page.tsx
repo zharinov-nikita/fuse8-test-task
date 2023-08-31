@@ -4,7 +4,7 @@ import { usePageJokes } from './jokes.hook'
 import type { Joke } from './jokes.type'
 import { memo } from 'react'
 
-const Jokes = memo((props: { jokes: Joke[] }) => {
+const Jokes = memo((props: { jokes: Joke[]; joke: string }) => {
     return props.jokes.map(({ id, value, created_at, url }) => (
         <S.JokeItem
             target='_blank'
@@ -13,6 +13,7 @@ const Jokes = memo((props: { jokes: Joke[] }) => {
             key={id + value}
             id={id}
             date={utilFormatDate(created_at)}
+            highlightSearchTerm={props.joke}
         />
     ))
 })
@@ -61,10 +62,14 @@ export const PageJokes = () => {
             <JokesLoading isLoading={query.isLoading} joke={joke} />
             <JokesError isError={query.isError} />
             <S.PrimaryJokesList>
-                {query.data && <Jokes jokes={query.data.result.slice(0, 2)} />}
+                {query.data && (
+                    <Jokes joke={joke} jokes={query.data.result.slice(0, 2)} />
+                )}
             </S.PrimaryJokesList>
             <S.SecondaryJokesList>
-                {query.data && <Jokes jokes={query.data.result.slice(2)} />}
+                {query.data && (
+                    <Jokes joke={joke} jokes={query.data.result.slice(2)} />
+                )}
             </S.SecondaryJokesList>
         </S.PageJokes>
     )

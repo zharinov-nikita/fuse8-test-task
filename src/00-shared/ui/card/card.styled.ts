@@ -30,6 +30,11 @@ export namespace S {
         overflow: auto;
     `
 
+    export const HighlightedText = styled.span`
+        background-color: ${({ theme }) => theme.colors.brand};
+        color: #fff;
+    `
+
     export const TitleSkeleton = styled.div`
         animation: ${pulseAnimation} 1.5s infinite;
         background-color: ${({ theme }) => theme.colors.skeletonPrimary};
