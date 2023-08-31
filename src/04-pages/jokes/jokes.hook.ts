@@ -1,19 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { useState, useCallback, ChangeEvent } from 'react'
-
-interface Joke {
-    id: string
-    value: string
-    created_at: string
-    updated_at: string
-    icon_url: string
-    url: string
-}
-
-interface JokesSearch {
-    total: number
-    result: Joke[]
-}
+import type { JokesSearch } from './jokes.type'
 
 async function getJokes(joke: string): Promise<JokesSearch> {
     const response = await fetch(
@@ -40,5 +27,7 @@ export function usePageJokes() {
         enabled: joke.length > 3,
     })
 
-    return { onChange, query, joke }
+    const foundJokes = query.data?.total || 0
+
+    return { onChange, query, joke, foundJokes }
 }

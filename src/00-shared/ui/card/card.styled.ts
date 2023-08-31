@@ -1,4 +1,16 @@
-import { styled } from 'styled-components'
+import { styled, keyframes } from 'styled-components'
+
+const pulseAnimation = keyframes`
+  0% {
+    background-color: #e0e0e0;
+  }
+  50% {
+    background-color: #f0f0f0;
+  }
+  100% {
+    background-color: #e0e0e0;
+  }
+`
 
 export namespace S {
     export const Card = styled.div`
@@ -28,6 +40,13 @@ export namespace S {
         }
     `
 
+    export const TitleSkeleton = styled.div`
+        animation: ${pulseAnimation} 1.5s infinite;
+        background-color: #e0e0e0;
+        height: 20px;
+        width: 100%;
+    `
+
     export const SecondaryText = styled.p`
         color: ${({ theme }) => theme.colors.secondary};
         font-family: ${({ theme }) => theme.fonts.secondary};
@@ -36,5 +55,20 @@ export namespace S {
     `
 
     export const Id = styled(SecondaryText)``
+
+    export const IdSkeleton = styled.div`
+        animation: ${pulseAnimation} 1.5s infinite;
+        background-color: #e0e0e0;
+        height: 20px;
+        width: 120px;
+    `
+
     export const Date = styled(SecondaryText)``
+
+    export const DateSkeleton = styled.div`
+        animation: ${pulseAnimation} 1.5s infinite;
+        background-color: #e0e0e0;
+        height: 20px;
+        width: 40px;
+    `
 }
