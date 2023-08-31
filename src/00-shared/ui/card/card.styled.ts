@@ -26,8 +26,7 @@ export namespace S {
         color: ${({ theme }) => theme.colors.primary};
         font-size: 20px;
         font-weight: 400;
-
-        overflow-wrap: break-word; /* Или word-wrap: break-word; */
+        overflow-wrap: break-word;
         overflow: auto;
     `
 

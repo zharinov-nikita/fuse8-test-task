@@ -1,6 +1,5 @@
 import { FC, memo } from 'react'
 import { S } from './card.styled'
-import { Link } from 'react-router-dom'
 
 interface Props {
     title?: string
