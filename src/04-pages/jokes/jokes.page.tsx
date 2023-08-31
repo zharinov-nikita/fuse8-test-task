@@ -10,7 +10,7 @@ const Jokes = memo((props: { jokes: Joke[] }) => {
             target='_blank'
             to={url}
             title={value}
-            key={id}
+            key={id + value}
             id={id}
             date={utilFormatDate(created_at)}
         />
@@ -46,8 +46,8 @@ export const PageJokes = () => {
                     placeholder='Search jokes...'
                     autoFocus
                 />
+                <S.FoundJokes>Found jokes: {foundJokes}</S.FoundJokes>
             </S.SearchJokes>
-            <S.FoundJokes>Found jokes: {foundJokes}</S.FoundJokes>
             {joke.length > 3 && query.isLoading && <JokesSkeleton />}
             <S.FirstRowJokes>
                 {query.data && <Jokes jokes={query.data.result.slice(0, 2)} />}

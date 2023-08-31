@@ -14,11 +14,9 @@ interface Props {
 export const SharedUiCardComponent: FC<Props> = memo((props) => {
     return (
         <S.Card data-testid='SharedUiCardComponent' className={props.className}>
-            <S.CardBody>
-                <Link to={props.to || ''} target={props.target}>
-                    <S.Title>{props.title}</S.Title>
-                </Link>
-            </S.CardBody>
+            <S.Title to={props.to || ''} target={props.target}>
+                {props.title}
+            </S.Title>
             <S.CardFooter>
                 <S.Id>{props.id}</S.Id>
                 <S.Date>{props.date}</S.Date>
