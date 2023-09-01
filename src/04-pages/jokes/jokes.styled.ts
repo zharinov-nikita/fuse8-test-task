@@ -14,10 +14,12 @@ export namespace S {
 
         @media screen and (max-width: 992px) {
             gap: 16px;
+            grid-template-rows: 100px calc(100vh - 100px - 16px);
         }
 
         @media screen and (max-width: 726px) {
             margin-top: 16px;
+            grid-template-rows: 100px calc(100vh - 100px - 16px);
         }
     `
 

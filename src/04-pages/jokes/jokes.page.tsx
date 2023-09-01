@@ -47,7 +47,7 @@ const Jokes = () => {
     return (
         <VirtuosoGrid
             data={mockJokes}
-            itemClassName='item'
+            itemClassName={s.item}
             listClassName={s.list}
             totalCount={mockJokes.length}
             itemContent={(_, joke) => (
@@ -62,7 +62,9 @@ const Jokes = () => {
             )}
             components={{
                 ScrollSeekPlaceholder: ({ height, width }) => (
-                    <SharedUiCardSkeleton style={{ width, height }} />
+                    <SharedUiCardSkeleton
+                        style={{ height, gridColumn: 'span 2' }}
+                    />
                 ),
             }}
             scrollSeekConfiguration={{
