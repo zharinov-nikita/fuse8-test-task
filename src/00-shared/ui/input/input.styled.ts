@@ -15,7 +15,7 @@ export namespace S {
         height: 64px;
 
         &::placeholder {
-            color: #656ec2;
+            color: ${({ theme }) => theme.colors.brand};
         }
     `
 }
