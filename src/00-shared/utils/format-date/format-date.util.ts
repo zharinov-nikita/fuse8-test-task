@@ -1,4 +1,4 @@
-export function utilFormatDate(dateString: string) {
+export function sharedUtilFormatDate(dateString: string) {
     const dateObject = new Date(dateString)
 
     const day = dateObject.getDate()

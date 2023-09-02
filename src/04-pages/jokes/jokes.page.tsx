@@ -1,8 +1,8 @@
 import {
     SharedUiCardSkeleton,
-    utilFormatDate,
-    utilGenerateArrayWithUniqueIds,
-    utilTruncateString,
+    sharedUtilFormatDate,
+    sharedUtilGenerateArrayWithUniqueIds,
+    sharedUtilTruncateString,
 } from '@shared'
 import { S } from './jokes.styled'
 import { usePageJokes } from './jokes.hook'
@@ -37,10 +37,14 @@ export const PageJokes = () => {
                         <S.JokeItem
                             target='_blank'
                             to={value.url}
-                            title={utilTruncateString(value.value, 120, '...')}
+                            title={sharedUtilTruncateString(
+                                value.value,
+                                120,
+                                '...'
+                            )}
                             key={value.id + value.value}
                             id={value.id}
-                            date={utilFormatDate(value.created_at)}
+                            date={sharedUtilFormatDate(value.created_at)}
                             highlightSearchTerm={joke}
                         />
                     )}
@@ -62,7 +66,7 @@ export const PageJokes = () => {
 const JokesLoading = () => {
     return (
         <div className={s.list}>
-            {utilGenerateArrayWithUniqueIds(10).map(({ id }) => (
+            {sharedUtilGenerateArrayWithUniqueIds(10).map(({ id }) => (
                 <S.JokeItemSkeleton className={s.skeleton} key={id} />
             ))}
         </div>

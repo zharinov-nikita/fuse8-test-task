@@ -1,4 +1,4 @@
-export function utilTruncateString(
+export function sharedUtilTruncateString(
     string: string,
     maxLength: number,
     textEnd?: string
