@@ -1,12 +1,12 @@
 import {
     SharedUiCardSkeleton,
-    utilFormatDate,
-    utilGenerateArrayWithUniqueIds,
-    utilTruncateString,
+    sharedUtilFormatDate,
+    sharedUtilGenerateArrayWithUniqueIds,
+    sharedUtilTruncateString,
 } from '@shared'
 import { S } from './jokes.styled'
 import { usePageJokes } from './jokes.hook'
-import { VirtuosoGrid } from 'react-virtuoso'
+import { VirtuosoGrid as JokesList } from 'react-virtuoso'
 import s from './jokes.module.css'
 
 export const PageJokes = () => {
@@ -28,7 +28,7 @@ export const PageJokes = () => {
             {mutation.isError && <JokesError />}
             {mutation.isLoading && <JokesLoading />}
             {mutation.data && (
-                <VirtuosoGrid
+                <JokesList
                     data={mutation.data.result}
                     itemClassName={s.item}
                     listClassName={s.list}
@@ -37,10 +37,14 @@ export const PageJokes = () => {
                         <S.JokeItem
                             target='_blank'
                             to={value.url}
-                            title={utilTruncateString(value.value, 120, '...')}
+                            title={sharedUtilTruncateString(
+                                value.value,
+                                120,
+                                '...'
+                            )}
                             key={value.id + value.value}
                             id={value.id}
-                            date={utilFormatDate(value.created_at)}
+                            date={sharedUtilFormatDate(value.created_at)}
                             highlightSearchTerm={joke}
                         />
                     )}
@@ -62,7 +66,7 @@ export const PageJokes = () => {
 const JokesLoading = () => {
     return (
         <div className={s.list}>
-            {utilGenerateArrayWithUniqueIds(10).map(({ id }) => (
+            {sharedUtilGenerateArrayWithUniqueIds(10).map(({ id }) => (
                 <S.JokeItemSkeleton className={s.skeleton} key={id} />
             ))}
         </div>

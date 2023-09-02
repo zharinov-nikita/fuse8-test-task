@@ -1,21 +1,6 @@
-import { useQuery, useMutation } from '@tanstack/react-query'
+import { EntityJokesApi } from '@entities'
+import { useMutation } from '@tanstack/react-query'
 import { useState, useCallback, ChangeEvent, useEffect } from 'react'
-import type { JokesSearch } from './jokes.type'
-import axios from 'axios'
-
-async function getJokes(joke: string): Promise<JokesSearch> {
-    const API = 'https://api.chucknorris.io'
-
-    const params = {
-        query: joke,
-    }
-
-    const response = await axios.get<JokesSearch>(`${API}/jokes/search`, {
-        params,
-    })
-
-    return response.data
-}
 
 export function usePageJokes() {
     const [joke, setJoke] = useState<string>('')
@@ -36,7 +21,8 @@ export function usePageJokes() {
     }, [joke])
 
     const mutation = useMutation({
-        mutationFn: (debouncedJoke: string) => getJokes(debouncedJoke),
+        mutationFn: (debouncedJoke: string) =>
+            new EntityJokesApi().searchJokes(debouncedJoke),
     })
 
     useEffect(() => {
