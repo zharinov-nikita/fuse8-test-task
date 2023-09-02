@@ -7,28 +7,30 @@ import { styled } from 'styled-components'
 
 export namespace S {
     export const PageJokes = styled.div`
-        padding: 16px;
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-        margin: 0 auto;
-        max-width: 1596px;
-        width: 100%;
+        display: grid;
+        grid-template-rows: 100px calc(100vh - 100px - 60px - 126px);
+        gap: 60px;
+        margin-top: 126px;
 
-        @media (min-width: 576px) {
-            margin-top: 128px;
-            margin-bottom: 16px;
-            padding: 0px 16px;
+        @media screen and (max-width: 992px) {
+            gap: 16px;
+            grid-template-rows: 100px calc(100vh - 100px - 16px);
+        }
+
+        @media screen and (max-width: 726px) {
+            margin-top: 16px;
+            grid-template-rows: 100px calc(100vh - 100px - 16px);
         }
     `
 
     export const FindJoke = styled.div`
-        max-width: 626px;
-        width: 100%;
-        margin: 0px auto;
         display: flex;
         flex-direction: column;
         gap: 12px;
+        padding: 16px;
+        max-width: 626px;
+        width: 100%;
+        margin: 0 auto;
     `
 
     export const JokeSearchField = styled(SharedUiInputComponent)``
@@ -60,6 +62,7 @@ export namespace S {
     export const JokeItem = styled(SharedUiCardComponent)`
         width: 100%;
         min-height: 300px;
+        height: 100%;
     `
 
     export const JokesListSkeleton = styled.div`
@@ -74,5 +77,6 @@ export namespace S {
     export const JokeItemSkeleton = styled(SharedUiCardSkeleton)`
         width: 100%;
         min-height: 300px;
+        height: 100%;
     `
 }

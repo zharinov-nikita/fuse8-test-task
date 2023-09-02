@@ -1,17 +1,20 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation } from '@tanstack/react-query'
 import { useState, useCallback, ChangeEvent, useEffect } from 'react'
 import type { JokesSearch } from './jokes.type'
+import axios from 'axios'
 
 async function getJokes(joke: string): Promise<JokesSearch> {
-    const response = await fetch(
-        `https://api.chucknorris.io/jokes/search?query=${joke}`
-    )
+    const API = 'https://api.chucknorris.io'
 
-    if (!response.ok) {
-        throw new Error('Network response was not ok')
+    const params = {
+        query: joke,
     }
 
-    return response.json()
+    const response = await axios.get<JokesSearch>(`${API}/jokes/search`, {
+        params,
+    })
+
+    return response.data
 }
 
 export function usePageJokes() {
@@ -23,8 +26,6 @@ export function usePageJokes() {
     }, [])
 
     useEffect(() => {
-        console.log('Debounced joke updated:', debouncedJoke)
-
         const debounceTimer = setTimeout(() => {
             setDebouncedJoke(joke)
         }, 300)
@@ -34,13 +35,19 @@ export function usePageJokes() {
         }
     }, [joke])
 
-    const query = useQuery<JokesSearch>({
-        queryKey: ['jokes', debouncedJoke],
-        queryFn: () => getJokes(debouncedJoke),
-        enabled: debouncedJoke.length > 3,
+    const mutation = useMutation({
+        mutationFn: (debouncedJoke: string) => getJokes(debouncedJoke),
     })
 
-    const foundJokes = query.data?.total || 0
+    useEffect(() => {
+        if (debouncedJoke.length > 3) {
+            mutation.mutate(debouncedJoke)
+        } else {
+            mutation.reset()
+        }
+    }, [debouncedJoke])
 
-    return { onChange, query, joke, foundJokes }
+    const foundJokes = mutation.data?.total || 0
+
+    return { onChange, joke, foundJokes, mutation }
 }
