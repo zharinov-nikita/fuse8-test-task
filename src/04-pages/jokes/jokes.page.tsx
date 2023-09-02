@@ -1,77 +1,85 @@
-import { SharedUiCardSkeleton, utilFormatDate } from '@shared'
+import {
+    SharedUiCardSkeleton,
+    utilFormatDate,
+    utilGenerateArrayWithUniqueIds,
+} from '@shared'
 import { S } from './jokes.styled'
 import { usePageJokes } from './jokes.hook'
-import { mockJokes } from '../../__mock__'
 import { VirtuosoGrid } from 'react-virtuoso'
 import s from './jokes.module.css'
-import { ChangeEventHandler, memo, useEffect, useState } from 'react'
-import { JokesSearch } from './jokes.type'
+import styled from 'styled-components'
+
+export const StyledComponent = styled.div`
+    width: 100%;
+`
 
 export const PageJokes = () => {
-    const { onChange, joke, foundJokes } = usePageJokes()
+    const { onChange, joke, foundJokes, mutation } = usePageJokes()
+
     return (
         <S.PageJokes>
-            <FoundJokes
-                joke={joke}
-                onChange={onChange}
-                foundJokes={foundJokes}
-            />
-            <Jokes />
-        </S.PageJokes>
-    )
-}
-
-const FoundJokes = memo(
-    (props: {
-        joke: string
-        onChange: ChangeEventHandler
-        foundJokes: number
-    }) => {
-        return (
             <S.FindJoke>
                 <S.JokeSearchField
-                    value={props.joke}
-                    onChange={props.onChange}
+                    value={joke}
+                    onChange={onChange}
                     placeholder='Search jokes...'
                     autoFocus
                 />
                 <S.FoundJokesNumber>
-                    Found jokes: {props.foundJokes}
+                    Found jokes:{' '}
+                    {mutation.isLoading ? 'Loading...' : foundJokes}
                 </S.FoundJokesNumber>
             </S.FindJoke>
-        )
-    }
-)
-
-const Jokes = () => {
-    return (
-        <VirtuosoGrid
-            data={mockJokes}
-            itemClassName={s.item}
-            listClassName={s.list}
-            totalCount={mockJokes.length}
-            itemContent={(_, joke) => (
-                <S.JokeItem
-                    target='_blank'
-                    to={joke.url}
-                    title={joke.value}
-                    key={joke.id + joke.value}
-                    id={joke.id}
-                    date={utilFormatDate(joke.created_at)}
+            {mutation.isError && <JokesError />}
+            {mutation.isLoading && <JokesLoading />}
+            {mutation.data && (
+                <VirtuosoGrid
+                    data={mutation.data.result}
+                    itemClassName={s.item}
+                    listClassName={s.list}
+                    totalCount={mutation.data.result.length}
+                    itemContent={(_, value) => (
+                        <S.JokeItem
+                            target='_blank'
+                            to={value.url}
+                            title={value.value}
+                            key={value.id + value.value}
+                            id={value.id}
+                            date={utilFormatDate(value.created_at)}
+                            highlightSearchTerm={joke}
+                        />
+                    )}
+                    components={{
+                        ScrollSeekPlaceholder: ({ height, width }) => (
+                            <SharedUiCardSkeleton style={{ height, width }} />
+                        ),
+                    }}
+                    scrollSeekConfiguration={{
+                        enter: (velocity) => Math.abs(velocity) > 200,
+                        exit: (velocity) => Math.abs(velocity) < 30,
+                        change: (_, range) => console.log({ range }),
+                    }}
                 />
             )}
-            components={{
-                ScrollSeekPlaceholder: ({ height, width }) => (
-                    <SharedUiCardSkeleton
-                        style={{ height, gridColumn: 'span 2' }}
-                    />
-                ),
-            }}
-            scrollSeekConfiguration={{
-                enter: (velocity) => Math.abs(velocity) > 200,
-                exit: (velocity) => Math.abs(velocity) < 30,
-                change: (_, range) => console.log({ range }),
-            }}
-        />
+        </S.PageJokes>
+    )
+}
+
+const JokesLoading = () => {
+    return (
+        <div className={s.list}>
+            {utilGenerateArrayWithUniqueIds(10).map(({ id }) => (
+                <S.JokeItemSkeleton key={id} />
+            ))}
+        </div>
+    )
+}
+
+const JokesError = () => {
+    return (
+        <div>
+            An error occurred when requesting the server
+            https://api.chucknorris.io/
+        </div>
     )
 }
