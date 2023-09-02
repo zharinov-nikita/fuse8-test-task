@@ -62,6 +62,7 @@ export namespace S {
     export const JokeItem = styled(SharedUiCardComponent)`
         width: 100%;
         min-height: 300px;
+        height: 100%;
     `
 
     export const JokesListSkeleton = styled.div`
@@ -76,5 +77,6 @@ export namespace S {
     export const JokeItemSkeleton = styled(SharedUiCardSkeleton)`
         width: 100%;
         min-height: 300px;
+        height: 100%;
     `
 }

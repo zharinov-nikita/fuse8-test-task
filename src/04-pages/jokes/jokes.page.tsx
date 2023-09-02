@@ -2,12 +2,14 @@ import {
     SharedUiCardSkeleton,
     utilFormatDate,
     utilGenerateArrayWithUniqueIds,
+    utilTruncateString,
 } from '@shared'
 import { S } from './jokes.styled'
 import { usePageJokes } from './jokes.hook'
-import { VirtuosoGrid } from 'react-virtuoso'
+import { VirtuosoGrid, VirtuosoGridHandle } from 'react-virtuoso'
 import s from './jokes.module.css'
 import styled from 'styled-components'
+import { useEffect, useRef } from 'react'
 
 export const StyledComponent = styled.div`
     width: 100%;
@@ -15,6 +17,11 @@ export const StyledComponent = styled.div`
 
 export const PageJokes = () => {
     const { onChange, joke, foundJokes, mutation } = usePageJokes()
+    const ref = useRef<VirtuosoGridHandle>(null)
+
+    useEffect(() => {
+        console.log(ref.current)
+    }, [ref])
 
     return (
         <S.PageJokes>
@@ -42,7 +49,7 @@ export const PageJokes = () => {
                         <S.JokeItem
                             target='_blank'
                             to={value.url}
-                            title={value.value}
+                            title={utilTruncateString(value.value, 120, '...')}
                             key={value.id + value.value}
                             id={value.id}
                             date={utilFormatDate(value.created_at)}

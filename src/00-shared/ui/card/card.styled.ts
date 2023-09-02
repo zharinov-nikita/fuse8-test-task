@@ -28,6 +28,10 @@ export namespace S {
         font-weight: 400;
         overflow-wrap: break-word;
         overflow: auto;
+
+        &:hover {
+            color: ${({ theme }) => theme.colors.brand};
+        }
     `
 
     export const HighlightedText = styled.span`
