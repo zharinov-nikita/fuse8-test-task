@@ -1,4 +1,4 @@
-export interface Joke {
+export interface EntityJokeType {
     id: string
     value: string
     created_at: string
@@ -7,7 +7,7 @@ export interface Joke {
     url: string
 }
 
-export interface JokesSearch {
+export interface EntityJokesSearchType {
     total: number
-    result: Joke[]
+    result: EntityJokeType[]
 }

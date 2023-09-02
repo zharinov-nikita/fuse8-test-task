@@ -1,0 +1,23 @@
+name: Testing
+on: [push]
+jobs:
+  init:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: yarn
+      - name: detect circular dependencies
+        run: yarn run detect-circular-dependencies
+      - name: install modules    
+        run: yarn install
+      - name: testing    
+        run: npx vitest --watch=false --passWithNoTests --dir=./src
+      - name: build    
+        run: yarn run build
