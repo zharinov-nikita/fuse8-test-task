@@ -1,7 +1,0 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-npm run detect-circular-dependencies
-npx vitest --watch=false --passWithNoTests --dir=./src -u
-npm run build
-git add .
