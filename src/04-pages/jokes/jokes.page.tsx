@@ -6,23 +6,11 @@ import {
 } from '@shared'
 import { S } from './jokes.styled'
 import { usePageJokes } from './jokes.hook'
-import { VirtuosoGrid, VirtuosoGridHandle } from 'react-virtuoso'
+import { VirtuosoGrid } from 'react-virtuoso'
 import s from './jokes.module.css'
-import styled from 'styled-components'
-import { useEffect, useRef } from 'react'
-
-export const StyledComponent = styled.div`
-    width: 100%;
-`
 
 export const PageJokes = () => {
     const { onChange, joke, foundJokes, mutation } = usePageJokes()
-    const ref = useRef<VirtuosoGridHandle>(null)
-
-    useEffect(() => {
-        console.log(ref.current)
-    }, [ref])
-
     return (
         <S.PageJokes>
             <S.FindJoke>
@@ -64,7 +52,6 @@ export const PageJokes = () => {
                     scrollSeekConfiguration={{
                         enter: (velocity) => Math.abs(velocity) > 200,
                         exit: (velocity) => Math.abs(velocity) < 30,
-                        change: (_, range) => console.log({ range }),
                     }}
                 />
             )}
@@ -76,7 +63,7 @@ const JokesLoading = () => {
     return (
         <div className={s.list}>
             {utilGenerateArrayWithUniqueIds(10).map(({ id }) => (
-                <S.JokeItemSkeleton key={id} />
+                <S.JokeItemSkeleton className={s.skeleton} key={id} />
             ))}
         </div>
     )
