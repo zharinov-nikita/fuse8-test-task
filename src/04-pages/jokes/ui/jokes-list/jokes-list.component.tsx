@@ -18,7 +18,7 @@ export const UiJokesListComponent = () => {
                     rangeChanged={setVisibleRange}
                     itemContent={(_, value) => (
                         <S.JokesItem
-                            target='_blank'
+                            target="_blank"
                             to={value.url}
                             title={sharedUtilTruncateString(
                                 value.value,

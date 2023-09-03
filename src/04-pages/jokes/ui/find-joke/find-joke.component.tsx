@@ -9,7 +9,7 @@ export const UiFindJokeComponent = () => {
             <S.JokeSearchField
                 value={pageJokesStore.joke}
                 onChange={onChange}
-                placeholder='Search jokes...'
+                placeholder="Search jokes..."
                 autoFocus
             />
             <S.FoundJokesNumber>

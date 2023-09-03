@@ -12,8 +12,8 @@ export const App = () => {
             <ThemeProvider theme={appStyleTheme}>
                 <AppStyleReset />
                 <Routes>
-                    <Route element={<PageJokes />} path='jokes' />
-                    <Route element={<Navigate to='jokes' />} path='*' />
+                    <Route element={<PageJokes />} path="jokes" />
+                    <Route element={<Navigate to="jokes" />} path="*" />
                 </Routes>
             </ThemeProvider>
         </QueryClientProvider>

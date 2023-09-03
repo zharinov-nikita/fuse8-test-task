@@ -37,7 +37,7 @@ interface Props {
 
 export const SharedUiCardComponent: FC<Props> = memo((props) => {
     return (
-        <S.Card data-testid='SharedUiCardComponent' className={props.className}>
+        <S.Card data-testid="SharedUiCardComponent" className={props.className}>
             <S.Title to={props.to || ''} target={props.target}>
                 <HighlightedText
                     text={props.title}
