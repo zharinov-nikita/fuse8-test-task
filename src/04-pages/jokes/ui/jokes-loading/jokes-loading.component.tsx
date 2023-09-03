@@ -10,7 +10,9 @@ export const UiJokesLoading = () => {
             {isLoading && (
                 <div className={css.listPrimary}>
                     {sharedUtilGenerateArrayWithUniqueIds(30).map(({ id }) => (
-                        <S.JokeSkeleton className={css.itemPrimary} key={id} />
+                        <div className={css.itemPrimary} key={id}>
+                            <S.JokeSkeleton />
+                        </div>
                     ))}
                 </div>
             )}
