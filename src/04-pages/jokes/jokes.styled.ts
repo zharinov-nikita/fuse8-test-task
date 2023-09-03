@@ -8,17 +8,11 @@ import { styled } from 'styled-components'
 export namespace S {
     export const PageJokes = styled.div`
         display: grid;
-        grid-template-rows: 100px calc(100vh - 100px - 60px - 126px);
         gap: 60px;
         margin-top: 126px;
 
-        @media screen and (max-width: 992px) {
+        @media screen and (max-width: 1024px) {
             gap: 16px;
-            grid-template-rows: 100px calc(100vh - 100px - 16px);
-            margin-top: 16px;
-        }
-
-        @media screen and (max-width: 726px) {
             margin-top: 16px;
         }
     `

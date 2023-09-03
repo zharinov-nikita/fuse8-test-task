@@ -44,6 +44,10 @@ export function usePageJokes() {
 
     const foundJokes = mutation.data?.total || 0
 
+    useEffect(() => {
+        console.log(visibleRange)
+    }, [visibleRange])
+
     return {
         onChange,
         joke,

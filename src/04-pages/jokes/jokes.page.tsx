@@ -8,7 +8,7 @@ import {
 import { S } from './jokes.styled'
 import { usePageJokes } from './jokes.hook'
 import { VirtuosoGrid as JokesList } from 'react-virtuoso'
-import s from './jokes.module.css'
+import css from './jokes.module.css'
 
 export const PageJokes = () => {
     const {
@@ -20,6 +20,12 @@ export const PageJokes = () => {
         setVisibleRange,
         backToSearch,
     } = usePageJokes()
+
+    const listClassName =
+        visibleRange.startIndex === 0 ? css.listPrimary : css.listSecondary
+    const itemClassName =
+        visibleRange.startIndex === 0 ? css.itemPrimary : css.itemSecondary
+
     return (
         <S.PageJokes>
             <S.FindJoke>
@@ -40,8 +46,8 @@ export const PageJokes = () => {
                 <JokesList
                     useWindowScroll
                     data={mutation.data.result}
-                    itemClassName={s.item}
-                    listClassName={s.list}
+                    listClassName={listClassName}
+                    itemClassName={itemClassName}
                     totalCount={mutation.data.result.length}
                     rangeChanged={setVisibleRange}
                     itemContent={(_, value) => (
@@ -59,15 +65,6 @@ export const PageJokes = () => {
                             highlightSearchTerm={joke}
                         />
                     )}
-                    components={{
-                        ScrollSeekPlaceholder: ({ height, width }) => (
-                            <SharedUiCardSkeleton style={{ height, width }} />
-                        ),
-                    }}
-                    scrollSeekConfiguration={{
-                        enter: (velocity) => Math.abs(velocity) > 200,
-                        exit: (velocity) => Math.abs(velocity) < 30,
-                    }}
                 />
             )}
             {visibleRange.startIndex > 0 && (
@@ -85,9 +82,9 @@ export const PageJokes = () => {
 
 const JokesLoading = () => {
     return (
-        <div className={s.list}>
-            {sharedUtilGenerateArrayWithUniqueIds(10).map(({ id }) => (
-                <S.JokeItemSkeleton className={s.skeleton} key={id} />
+        <div className={css.listPrimary}>
+            {sharedUtilGenerateArrayWithUniqueIds(30).map(({ id }) => (
+                <S.JokeItemSkeleton className={css.itemPrimary} key={id} />
             ))}
         </div>
     )
