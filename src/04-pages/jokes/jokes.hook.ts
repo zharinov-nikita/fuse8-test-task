@@ -3,6 +3,15 @@ import { useMutation } from '@tanstack/react-query'
 import { useState, useCallback, ChangeEvent, useEffect } from 'react'
 
 export function usePageJokes() {
+    const [visibleRange, setVisibleRange] = useState({
+        startIndex: 0,
+        endIndex: 0,
+    })
+
+    function backToSearch() {
+        window.scrollTo(0, 0)
+    }
+
     const [joke, setJoke] = useState<string>('')
     const [debouncedJoke, setDebouncedJoke] = useState<string>('')
 
@@ -35,5 +44,13 @@ export function usePageJokes() {
 
     const foundJokes = mutation.data?.total || 0
 
-    return { onChange, joke, foundJokes, mutation }
+    return {
+        onChange,
+        joke,
+        foundJokes,
+        mutation,
+        visibleRange,
+        setVisibleRange,
+        backToSearch,
+    }
 }

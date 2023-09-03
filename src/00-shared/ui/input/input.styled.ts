@@ -12,7 +12,7 @@ export namespace S {
         font-weight: bold;
         filter: drop-shadow(0px 7px 12px rgba(100, 100, 111, 0.2));
         padding: 12px 24px;
-        height: 64px;
+        min-height: 64px;
 
         &::placeholder {
             color: ${({ theme }) => theme.colors.brand};

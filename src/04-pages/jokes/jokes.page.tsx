@@ -1,4 +1,5 @@
 import {
+    SharedUiButtonComponent,
     SharedUiCardSkeleton,
     sharedUtilFormatDate,
     sharedUtilGenerateArrayWithUniqueIds,
@@ -10,7 +11,15 @@ import { VirtuosoGrid as JokesList } from 'react-virtuoso'
 import s from './jokes.module.css'
 
 export const PageJokes = () => {
-    const { onChange, joke, foundJokes, mutation } = usePageJokes()
+    const {
+        onChange,
+        joke,
+        foundJokes,
+        mutation,
+        visibleRange,
+        setVisibleRange,
+        backToSearch,
+    } = usePageJokes()
     return (
         <S.PageJokes>
             <S.FindJoke>
@@ -34,6 +43,7 @@ export const PageJokes = () => {
                     itemClassName={s.item}
                     listClassName={s.list}
                     totalCount={mutation.data.result.length}
+                    rangeChanged={setVisibleRange}
                     itemContent={(_, value) => (
                         <S.JokeItem
                             target='_blank'
@@ -59,6 +69,15 @@ export const PageJokes = () => {
                         exit: (velocity) => Math.abs(velocity) < 30,
                     }}
                 />
+            )}
+            {visibleRange.startIndex > 0 && (
+                <S.BackToSearchContainer>
+                    <S.BackToSearchWrapper>
+                        <SharedUiButtonComponent onClick={backToSearch}>
+                            Back to Search 🔍
+                        </SharedUiButtonComponent>
+                    </S.BackToSearchWrapper>
+                </S.BackToSearchContainer>
             )}
         </S.PageJokes>
     )
