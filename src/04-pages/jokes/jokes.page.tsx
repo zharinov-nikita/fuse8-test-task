@@ -29,6 +29,7 @@ export const PageJokes = () => {
             {mutation.isLoading && <JokesLoading />}
             {mutation.data && (
                 <JokesList
+                    useWindowScroll
                     data={mutation.data.result}
                     itemClassName={s.item}
                     listClassName={s.list}
