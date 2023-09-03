@@ -8,17 +8,11 @@ import { styled } from 'styled-components'
 export namespace S {
     export const PageJokes = styled.div`
         display: grid;
-        grid-template-rows: 100px calc(100vh - 100px - 60px - 126px);
         gap: 60px;
         margin-top: 126px;
 
-        @media screen and (max-width: 992px) {
+        @media screen and (max-width: 1024px) {
             gap: 16px;
-            grid-template-rows: 100px calc(100vh - 100px - 16px);
-            margin-top: 16px;
-        }
-
-        @media screen and (max-width: 726px) {
             margin-top: 16px;
         }
     `
@@ -53,5 +47,20 @@ export namespace S {
         width: 100%;
         min-height: 300px;
         height: 100%;
+    `
+
+    export const BackToSearchContainer = styled.div`
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    `
+    export const BackToSearchWrapper = styled.div`
+        padding: 16px;
+        max-width: 626px;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
     `
 }

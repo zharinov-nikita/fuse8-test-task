@@ -1,0 +1,26 @@
+/* primary */
+.listPrimary {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 24px;
+}
+
+.itemPrimary {
+    grid-column: span 2;
+}
+
+.itemPrimary:nth-child(1), .itemPrimary:nth-child(2) {
+    grid-column: span 3;
+}
+
+
+/* secondary */
+.listSecondary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.itemSecondary {
+    grid-column: auto;
+}
