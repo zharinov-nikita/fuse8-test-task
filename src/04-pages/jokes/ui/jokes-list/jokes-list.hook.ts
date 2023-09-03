@@ -20,8 +20,8 @@ export function useUiJokesList() {
     }, [startIndex, endIndex])
 
     const mutation = useMutation({
-        mutationFn: (debouncedJoke: string) => {
-            return new EntityJokesApi().searchJokes(debouncedJoke)
+        mutationFn: (joke: string) => {
+            return new EntityJokesApi().searchJokes(joke)
         },
     })
 

@@ -7,16 +7,27 @@ interface IsVisibleRange {
 }
 
 interface PageJokesStore {
+    // шутка, которую ищет пользователь и вписывает в поле ввода
     joke: string
     setJoke: (joke: string) => void
+
+    // кол-во шуток, которые были найдены после поиска
     foundJokes: number
     setFoundJokes: (foundJokes: number) => void
+
+    // грузятся ли шутки
     jokes: EntityJokeType[]
     setJokes: (jokes: EntityJokeType[]) => void
+
+    // Состояние загрузки
     isLoading: boolean
     setIsLoading: (isLoading: boolean) => void
+
+    // была ли ошибка при загрузке шуток
     isError: boolean
     setIsError: (isError: boolean) => void
+
+    // данные о позиции скролла виртуального списка с шутками
     isVisibleRange: IsVisibleRange
     setIsVisibleRange: (isVisibleRange: IsVisibleRange) => void
 }
